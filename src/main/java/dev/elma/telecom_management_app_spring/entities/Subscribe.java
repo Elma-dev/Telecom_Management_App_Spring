@@ -1,5 +1,6 @@
 package dev.elma.telecom_management_app_spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class Subscribe {
     private double pay;
     private double amount;
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Client client;
 
 }
