@@ -48,5 +48,16 @@ public class RestWebServices {
     public List<Subscribe> getAllSubscribers(){
         return subscribeRepository.findAll();
     }
+    @GetMapping("/subscribers/{id}")
+    public Subscribe getSubscribe(@PathVariable(name = "id") long id){
+        return subscribeRepository.findById(id).get();
+    }
+
+    @PostMapping("/subscribers/add/{clientId}")
+    public Subscribe addSubscribe(@PathVariable("clientId") long clientId,@RequestBody Subscribe subscribe){
+        Client client = clientRepository.findById(clientId).get();
+        subscribe.setClient(client);
+        return subscribeRepository.save(subscribe);
+    }
 
 }
