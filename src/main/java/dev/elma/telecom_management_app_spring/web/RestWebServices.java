@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/clients")
+@RequestMapping("/clients")
 @AllArgsConstructor
 public class RestWebServices {
     private ClientRepository clientRepository;
     private SubscribeRepository subscribeRepository;
 
-    @GetMapping("/clients")
+    @GetMapping("/all")
     public List<Client> getAllClients(){
         return this.clientRepository.findAll();
     }
@@ -44,20 +44,6 @@ public class RestWebServices {
         return this.clientRepository.save(client1);
     }
 
-    @GetMapping("/subscribers")
-    public List<Subscribe> getAllSubscribers(){
-        return subscribeRepository.findAll();
-    }
-    @GetMapping("/subscribers/{id}")
-    public Subscribe getSubscribe(@PathVariable(name = "id") long id){
-        return subscribeRepository.findById(id).get();
-    }
 
-    @PostMapping("/subscribers/add/{clientId}")
-    public Subscribe addSubscribe(@PathVariable("clientId") long clientId,@RequestBody Subscribe subscribe){
-        Client client = clientRepository.findById(clientId).get();
-        subscribe.setClient(client);
-        return subscribeRepository.save(subscribe);
-    }
 
 }
